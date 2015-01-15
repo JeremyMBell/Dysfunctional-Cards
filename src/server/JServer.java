@@ -34,8 +34,10 @@ public class JServer {
         this.port = port;
         server = new ServerSocket(port);
         deck = new Deck(black, white);
+        System.out.println(server.getInetAddress());
         startServer();
     }
+    public ServerSocket getServer() {return server;}
     public void startServer() {
         Thread run = new Thread(new Wait());
         run.start();
@@ -69,7 +71,7 @@ public class JServer {
         
         public void deal(Player play, PrintWriter out) {
             out.println("DEALSTART");
-            for (int i = play.getHand().length; i < Player.MAX_CARDS; i++) {
+            for (int i = 0; i < Player.MAX_CARDS; i++) {
                 Card card = deck.takeWhite();
                 play.addCard(card);
                 out.println(card.toString());
